@@ -1,27 +1,27 @@
-# Firewall Rule: SSH
-resource "google_compute_firewall" "fw_ssh" {
-  name = "fwrule-allow-ssh22"
+resource "google_compute_firewall" "myterrafw_ssh" {
+  name    = "fw-allow-ssh"
+  network = google_compute_network.myterravpc.name
+
   allow {
-    ports    = ["22"]
     protocol = "tcp"
+    ports = ["22"]
   }
-  direction     = "INGRESS"
-  network       = google_compute_network.myvpc.id 
-  priority      = 1000
+  target_tags = ["fw-ssh-ingress"]
+  direction = "INGRESS"
+  priority = 1000
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["ssh-tag"]
 }
 
-# Firewall Rule: HTTP Port 80
-resource "google_compute_firewall" "fw_http" {
-  name = "fwrule-allow-http80"
+resource "google_compute_firewall" "myterrafw_http" {
+  name    = "fw-allow-http"
+  network = google_compute_network.myterravpc.name
+
   allow {
-    ports    = ["80"]
     protocol = "tcp"
+    ports = ["80"]
   }
-  direction     = "INGRESS"
-  network       = google_compute_network.myvpc.id 
-  priority      = 1000
+  target_tags = ["fw-http-ingress"]
+  direction = "INGRESS"
+  priority = 1000
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["webserver-tag"]
 }
