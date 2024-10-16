@@ -1,6 +1,6 @@
 # Resource: VPC
 resource "google_compute_network" "myvpc" {
-  project = "gcplearn9"
+  project = "astral-pivot-437913-g0"
   name = "vpc1"
   auto_create_subnetworks = false   
 }
